@@ -255,9 +255,6 @@ def is_valid_item(nm, price_str, cnt_str=None):
         if re.search(p, nm_str): return False
     price_raw = str(price_str).strip()
     if len(re.findall(r'[a-zA-Z]', price_raw)) > 3: return False
-    if re.match(r'^[A-Z0-9\s\-:]{5,}$', nm_str) and not re.search(r'[a-z]', nm_str):
-        if not re.search(r'(?i)(nasi|mie|ayam|ikan|teh|kopi|rice|chicken|coffee|tea|water|juice|beer|wine|pizza|burger|fries|soda|cake)', nm_str):
-            return False
     return True
 
 # ===============================
