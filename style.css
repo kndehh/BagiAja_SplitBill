@@ -1,0 +1,106 @@
+﻿@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");
+
+html,
+body,
+[class*="stApp"],
+.stApp {
+  font-family: "Inter", sans-serif !important;
+}
+
+/* Hide Streamlit top-right hamburger & footer */
+#MainMenu {
+  visibility: hidden;
+}
+header {
+  visibility: hidden;
+}
+footer {
+  visibility: hidden;
+}
+
+/* Smooth custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+/* Tighten spacing */
+.st-emotion-cache-1y4p8pa {
+  padding: 1rem 2rem;
+}
+
+/* Card-like blocks */
+.stExpander,
+.stDataFrame,
+.stJson {
+  border-radius: 12px !important;
+  border: 1px solid #e2e8f0 !important;
+}
+
+/* Buttons */
+.stButton > button {
+  border-radius: 10px !important;
+  font-weight: 600 !important;
+  transition:
+    transform 0.1s ease,
+    opacity 0.2s ease !important;
+}
+.stButton > button:active {
+  transform: scale(0.97) !important;
+}
+
+/* Primary buttons (Streamlit type=primary) */
+.stButton > button[kind="primary"] {
+  background: #000000 !important;
+  color: #ffffff !important;
+  border: none !important;
+}
+.stButton > button[kind="primary"]:hover {
+  background: #333333 !important;
+}
+
+/* Secondary buttons */
+.stButton > button[kind="secondary"] {
+  background: #ffffff !important;
+  color: #000000 !important;
+  border: 1px solid #000000 !important;
+}
+
+/* Inputs */
+.stTextInput input,
+.stNumberInput input,
+.stSelectbox div[data-baseweb="select"] {
+  border-radius: 8px !important;
+  border-color: #e2e8f0 !important;
+}
+.stTextInput input:focus,
+.stNumberInput input:focus {
+  border-color: #000000 !important;
+  box-shadow: 0 0 0 1px #000000 !important;
+}
+
+/* Data editor */
+[data-testid="stDataFrame"] td {
+  color: #000000 !important;
+}
+[data-testid="stDataFrame"] th {
+  font-weight: 700 !important;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  color: #64748b !important;
+}
+
+/* Images */
+.stImage img {
+  border-radius: 12px !important;
+  border: 1px solid #e2e8f0 !important;
+}
