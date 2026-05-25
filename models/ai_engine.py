@@ -305,6 +305,7 @@ def parse_cord_to_schema(cord_json):
     menu = cord_json.get("menu", [])
     if isinstance(menu, dict): menu = [menu]
 
+    per_item_discount = 0.0
     for item in menu:
         entries = item if isinstance(item, list) else [item]
         for entry in entries:
@@ -316,6 +317,7 @@ def parse_cord_to_schema(cord_json):
             cnt = clean_price(cnt_raw)
             if cnt == 0: cnt = 1
             items.append({"item_name": str(nm), "item_quantity": cnt, "item_price": price})
+            per_item_discount += abs(clean_price(entry.get("discountprice", "0")))
 
     sub_total_node = cord_json.get("sub_total", {})
     if isinstance(sub_total_node, list):
@@ -323,7 +325,8 @@ def parse_cord_to_schema(cord_json):
     subtotal = clean_price(sub_total_node.get("subtotal_price", "0"))
     tax_amount = clean_price(sub_total_node.get("tax_price", "0"))
     service_charge = clean_price(sub_total_node.get("service_price", "0"))
-    discount_val = clean_price(sub_total_node.get("discount_price", "0"))
+    overall_discount = clean_price(sub_total_node.get("discount_price", "0"))
+    discount_val = overall_discount if overall_discount > 0 else per_item_discount
 
     total_node = cord_json.get("total", {})
     if isinstance(total_node, list):
