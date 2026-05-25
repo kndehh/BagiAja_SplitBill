@@ -27,20 +27,29 @@ def load_donut_model(model_path="./donut-mega-finetuned-final-v6", hf_fallback="
     """Load Donut model from local path; fall back to HuggingFace Hub if not found."""
     import os
     # Determine which path to use
+    print(f"[DEBUG] model_path: {model_path}, exists: {os.path.isdir(model_path) if model_path else False}")
+    print(f"[DEBUG] hf_fallback: {hf_fallback}")
     if model_path and os.path.isdir(model_path):
         load_path = model_path
+        print(f"[DEBUG] Using local path: {load_path}")
     elif hf_fallback:
         load_path = hf_fallback
+        print(f"[DEBUG] Using HF Hub fallback: {load_path}")
     else:
+        print("[DEBUG] No valid path found")
         return None, None, "cpu", False
     try:
+        print(f"[DEBUG] Loading from: {load_path}")
         processor = DonutProcessor.from_pretrained(load_path)
         model = VisionEncoderDecoderModel.from_pretrained(load_path)
         device = "cuda" if torch.cuda.is_available() else "cpu"
         model.to(device)
+        print(f"[DEBUG] Successfully loaded on {device}")
         return processor, model, device, True
     except Exception as e:
-        print(f"Failed to load model from {load_path}: {e}")
+        print(f"[DEBUG] Failed to load model from {load_path}: {e}")
+        import traceback
+        traceback.print_exc()
         return None, None, "cpu", False
 
 # ===============================
